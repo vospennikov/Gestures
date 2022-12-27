@@ -11,7 +11,6 @@ public struct TouchGesture: ViewModifier {
     public var count: Int
     public var coordinateSpace: CoordinateSpace
     public var onEnded: (Value) -> Void
-    @State private var touchLocation: CGPoint = .zero
     
     public struct Value: Equatable {
         public var location: CGPoint
@@ -28,7 +27,7 @@ public struct TouchGesture: ViewModifier {
         if #available(iOS 16.0, *) {
             return SpatialTapGesture(count: count)
                 .onEnded { gesture in
-                    touchLocation = gesture.location
+                    onEnded(.init(location: gesture.location))
                 }
         } else {
             return SequenceGesture(TapGesture(count: count),
