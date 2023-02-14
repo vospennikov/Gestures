@@ -10,6 +10,7 @@ import SwiftUI
 public struct TouchGesture: ViewModifier {
     public var count: Int
     public var coordinateSpace: CoordinateSpace
+    
     public var onEnded: (Value) -> Void
     
     public struct Value: Equatable {
@@ -32,22 +33,35 @@ public struct TouchGesture: ViewModifier {
         } else {
             return SequenceGesture(TapGesture(count: count),
                                    DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                .onEnded { value in
-                    guard ((value.startLocation.x - 1)...(value.startLocation.x + 1)).contains(value.location.x),
-                          ((value.startLocation.y - 1)...(value.startLocation.y + 1)).contains(value.location.y) else {
+                .onEnded { gesture in
+                    guard gesture.contains(gesture.location) else {
                         return
                     }
-                    onEnded(.init(location: value.location))
+                    onEnded(.init(location: gesture.location))
                 }
             )
         }
     }
 }
 
+fileprivate extension DragGesture.Value {
+    func contains(_ location: CGPoint) -> Bool {
+        guard ((startLocation.x - 1)...(startLocation.x + 1)).contains(location.x),
+              ((startLocation.y - 1)...(startLocation.y + 1)).contains(location.y) else {
+            return false
+        }
+        return true
+    }
+}
+
 public extension View {
-    func onTouchGesture(count: Int,
-                        coordinateSpace: CoordinateSpace = .local,
-                        onEnded: @escaping (TouchGesture.Value) -> Void = { _ in }) -> some View {
-        modifier(TouchGesture(count: count, coordinateSpace: coordinateSpace, onEnded: onEnded))
+    func onTouchGesture(
+        count: Int = 1,
+        coordinateSpace: CoordinateSpace = .local,
+        onEnded: @escaping (TouchGesture.Value) -> Void = { _ in }
+    ) -> some View {
+        modifier(
+            TouchGesture(count: count, coordinateSpace: coordinateSpace, onEnded: onEnded)
+        )
     }
 }
