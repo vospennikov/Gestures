@@ -14,13 +14,13 @@ public struct SwipeGesture: ViewModifier {
     
     public var minimumDistance: CGFloat
     public var coordinateSpace: CoordinateSpace
-    public var onChanged: (Direction) -> Void
-    public var onEnded: (Direction) -> Void
+    public var onChanged: (Direction, CGPoint) -> Void
+    public var onEnded: (Direction, CGPoint) -> Void
     
     public init(minimumDistance: CGFloat,
                 coordinateSpace: CoordinateSpace,
-                onChanged: @escaping (Direction) -> Void,
-                onEnded: @escaping (Direction) -> Void) {
+                onChanged: @escaping (Direction, CGPoint) -> Void,
+                onEnded: @escaping (Direction, CGPoint) -> Void) {
         self.minimumDistance = minimumDistance
         self.coordinateSpace = coordinateSpace
         self.onChanged = onChanged
@@ -32,11 +32,11 @@ public struct SwipeGesture: ViewModifier {
             .gesture(DragGesture(minimumDistance: minimumDistance, coordinateSpace: coordinateSpace)
                 .onChanged { value in
                     let direction = direction(y: value.translation.width, x: value.translation.height)
-                    onChanged(direction)
+                    onChanged(direction, value.location)
                 }
                 .onEnded { value in
                     let direction = direction(y: value.translation.width, x: value.translation.height)
-                    onEnded(direction)
+                    onEnded(direction, value.location)
                 }
             )
     }
@@ -61,8 +61,8 @@ public struct SwipeGesture: ViewModifier {
 public extension View {
     func onSwipeGesture(minimumDistance: CGFloat = 10,
                         coordinateSpace: CoordinateSpace = .local,
-                        onChanged: @escaping (SwipeGesture.Direction) -> Void = { _ in },
-                        onEnded: @escaping (SwipeGesture.Direction) -> Void = { _ in }) -> some View {
+                        onChanged: @escaping (SwipeGesture.Direction, CGPoint) -> Void = { _, _  in },
+                        onEnded: @escaping (SwipeGesture.Direction, CGPoint) -> Void = { _, _ in }) -> some View {
         
         modifier(SwipeGesture(minimumDistance: minimumDistance,
                               coordinateSpace: coordinateSpace,

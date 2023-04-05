@@ -17,12 +17,12 @@ struct ContentView: View {
             Rectangle()
                 .foregroundColor(.white)
                 .onTouchGesture(count: 1) { gesture in
-                    touchLocation = "x: \(gesture.location.x.rounded()), y: \(gesture.location.y.rounded())"
+                    touchLocation = gesture.location.roundedDescription
                 }
-                .onSwipeGesture(minimumDistance: 15.0, coordinateSpace: .local) { gesture in
-                    swipeDirection = "\(gesture)"
-                } onEnded: { gesture in
-                    swipeDirection = "\(gesture)"
+                .onSwipeGesture(minimumDistance: 15.0, coordinateSpace: .local) { direction, location in
+                    swipeDirection = "\(direction): \(location.roundedDescription)"
+                } onEnded: { direction, location in
+                    swipeDirection = "\(direction): \(location.roundedDescription)"
                 }
             
             HStack {
@@ -42,5 +42,11 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+private extension CGPoint {
+    var roundedDescription: String {
+        "x: \(x.rounded()) y: \(y.rounded())"
     }
 }

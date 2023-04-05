@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DDC2083429DD4DCC00A1F36F /* Gestures in Frameworks */ = {isa = PBXBuildFile; productRef = DDC2083329DD4DCC00A1F36F /* Gestures */; };
 		DDC9C768299B51F500DB81F0 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC9C767299B51F500DB81F0 /* ExampleApp.swift */; };
 		DDC9C76A299B51F500DB81F0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC9C769299B51F500DB81F0 /* ContentView.swift */; };
 		DDC9C76C299B51F600DB81F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDC9C76B299B51F600DB81F0 /* Assets.xcassets */; };
 		DDC9C76F299B51F600DB81F0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDC9C76E299B51F600DB81F0 /* Preview Assets.xcassets */; };
 		DDC9C776299B528700DB81F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC9C775299B528700DB81F0 /* SceneDelegate.swift */; };
 		DDC9C778299B52F500DB81F0 /* ExampleAppWindowGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC9C777299B52F500DB81F0 /* ExampleAppWindowGroup.swift */; };
-		DDC9C77D299B533800DB81F0 /* Gestures in Frameworks */ = {isa = PBXBuildFile; productRef = DDC9C77C299B533800DB81F0 /* Gestures */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DD68C459299B5D2800BB11F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DDC2083229DD4DB400A1F36F /* Gestures */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Gestures; path = ..; sourceTree = "<group>"; };
 		DDC9C764299B51F500DB81F0 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC9C767299B51F500DB81F0 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		DDC9C769299B51F500DB81F0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -25,7 +26,6 @@
 		DDC9C76E299B51F600DB81F0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DDC9C775299B528700DB81F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DDC9C777299B52F500DB81F0 /* ExampleAppWindowGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppWindowGroup.swift; sourceTree = "<group>"; };
-		DDC9C77A299B532E00DB81F0 /* Gestures */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Gestures; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDC9C77D299B533800DB81F0 /* Gestures in Frameworks */,
+				DDC2083429DD4DCC00A1F36F /* Gestures in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +83,7 @@
 		DDC9C779299B532E00DB81F0 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				DDC9C77A299B532E00DB81F0 /* Gestures */,
+				DDC2083229DD4DB400A1F36F /* Gestures */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -112,7 +112,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				DDC9C77C299B533800DB81F0 /* Gestures */,
+				DDC2083329DD4DCC00A1F36F /* Gestures */,
 			);
 			productName = Example;
 			productReference = DDC9C764299B51F500DB81F0 /* Example.app */;
@@ -374,7 +374,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DDC9C77C299B533800DB81F0 /* Gestures */ = {
+		DDC2083329DD4DCC00A1F36F /* Gestures */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Gestures;
 		};
