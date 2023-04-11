@@ -95,12 +95,12 @@ private extension ContentView {
     func Finger(position: CGPoint) -> some View {
         ZStack {
             Circle()
-                .fill(Color(red: 0.75, green: 0.75, blue: 0.75))
-                .shadow(color: .gray.opacity(0.7), radius: 8, x: 4, y: 4)
+                .fill(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.75))
+                .shadow(color: .black.opacity(0.40), radius: 8, x: 4, y: 4)
             Circle()
-                .strokeBorder(Color(red: 0.65, green: 0.65, blue: 0.65), lineWidth: 1.0)
+                .strokeBorder(Color(red: 0.65, green: 0.65, blue: 0.65), lineWidth: 1)
         }
-        .frame(width: 44, height: 44)
+        .frame(width: 42, height: 42)
         .position(position)
     }
 }
