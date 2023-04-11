@@ -20,62 +20,99 @@ struct ContentView: View {
             Color.white
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .onTouchGesture(count: 1) { gesture in
-                    touchLocation = gesture.location.roundedDescription
-                    boxPosition = gesture.location
-                    fingerPosition = gesture.location
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        fingerPosition = nil
-                    }
+                    touchGestureAction(gesture)
                 }
                 .onSwipeGesture(minimumDistance: 15.0, coordinateSpace: .local) { direction, location in
-                    swipeDirection = "\(direction): \(location.roundedDescription)"
-                    fingerPosition = location
+                    swipeGestureChangedAction(direction, location: location)
                 } onEnded: { direction, location in
-                    swipeDirection = "\(direction): \(location.roundedDescription)"
-                    fingerPosition = nil
-                    switch direction {
-                        case .up: boxPosition.y -= 50
-                        case .down: boxPosition.y += 50
-                        case .left: boxPosition.x -= 50
-                        case .right: boxPosition.x += 50
-                        default: break
-                    }
+                    swipeGestureEndAction(direction, location: location)
                 }
             
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .foregroundColor(.pink)
-                .frame(width: 75, height: 75)
-                .position(boxPosition)
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Touch location: " + touchLocation)
-                    Text("Swipe direction: " + swipeDirection)
-                    Spacer()
-                }
-                .lineLimit(1)
-                Spacer()
-            }
-            .padding()
-            
+            MovableRectangle
+            Information
             if let fingerPosition {
-                Circle()
-                    .fill(Color(red: 0.7, green: 0.7, blue: 0.7))
-                    .frame(width: 44, height: 44)
-                    .shadow(color: .gray.opacity(0.7), radius: 8, x: 4, y: 4)
-                    .position(fingerPosition)
+                Finger(position: fingerPosition)
             }
         }
         .animation(.spring(), value: boxPosition)
     }
 }
 
+// MARK: - Gesture actions
+private extension ContentView {
+    func touchGestureAction(_ gesture: TouchGesture.Value) {
+        touchLocation = gesture.location.roundedDescription
+        boxPosition = gesture.location
+        fingerPosition = gesture.location
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            fingerPosition = nil
+        }
+    }
+    
+    func swipeGestureChangedAction(_ direction: SwipeGesture.Direction, location: CGPoint) {
+        swipeDirection = "\(direction): \(location.roundedDescription)"
+        fingerPosition = location
+    }
+    
+    func swipeGestureEndAction(_ direction: SwipeGesture.Direction, location: CGPoint) {
+        swipeDirection = "\(direction): \(location.roundedDescription)"
+        fingerPosition = nil
+        switch direction {
+            case .up: boxPosition.y -= 50
+            case .down: boxPosition.y += 50
+            case .left: boxPosition.x -= 50
+            case .right: boxPosition.x += 50
+            default: break
+        }
+    }
+}
+
+// MARK: - View builders
+private extension ContentView {
+    @ViewBuilder
+    var MovableRectangle: some View {
+        RoundedRectangle(cornerRadius: 16, style: .continuous)
+            .foregroundColor(.pink)
+            .frame(width: 75, height: 75)
+            .position(boxPosition)
+    }
+    
+    @ViewBuilder
+    var Information: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("Touch location: " + touchLocation)
+                Text("Swipe direction: " + swipeDirection)
+                Spacer()
+            }
+            .lineLimit(1)
+            Spacer()
+        }
+        .padding()
+    }
+    
+    @ViewBuilder
+    func Finger(position: CGPoint) -> some View {
+        ZStack {
+            Circle()
+                .fill(Color(red: 0.75, green: 0.75, blue: 0.75))
+                .shadow(color: .gray.opacity(0.7), radius: 8, x: 4, y: 4)
+            Circle()
+                .strokeBorder(Color(red: 0.65, green: 0.65, blue: 0.65), lineWidth: 1.0)
+        }
+        .frame(width: 44, height: 44)
+        .position(position)
+    }
+}
+
+// MARK: - Preview
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
 
+// MARK: - Helpers
 private extension CGPoint {
     var roundedDescription: String {
         "x: \(x.rounded()) y: \(y.rounded())"
