@@ -3,7 +3,7 @@
 ![Platforms](https://img.shields.io/badge/platforms-iOS--13-orange?style=flat)
 ![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat)
 ![GitHub](https://img.shields.io/badge/licence-MIT-orange)
-![demo3](Images/demo.gif)
+![Demo](Images/demo.gif)
 
 Before iOS 16, SwiftUI didn't return gesture location. This is a lightweight extension to SwiftUI's gesture API. 
 
