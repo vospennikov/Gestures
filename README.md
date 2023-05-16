@@ -6,7 +6,7 @@
 ![GitHub](https://img.shields.io/badge/Licence-MIT-orange)
 ![Demo](Images/demo.gif)
 
-Before iOS 16, SwiftUI didn't return gesture location. This is a lightweight extension to SwiftUI's gesture API. 
+Before iOS 16, SwiftUI didn't return the gesture location. It is a lightweight open-source extension to SwiftUI's gesture API.
 
 ## Usage
 ```swift
