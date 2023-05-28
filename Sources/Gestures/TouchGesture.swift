@@ -8,13 +8,20 @@
 import SwiftUI
 
 public struct TouchGesture: ViewModifier {
+    /// The number of touches required for the gesture to be recognised.
     public var count: Int
+    
+    /// The coordinate space in which the gesture is recognised.
     public var coordinateSpace: CoordinateSpace
     
+    /// A closure that is called when the touch gesture ends.
     public var onEnded: (Value) -> Void
     
+    /// The value representing the touch gesture.
     public struct Value: Equatable {
+        /// The location of the touch gesture in the coordinate space.
         public var location: CGPoint
+        
         public static func == (a: TouchGesture.Value, b: TouchGesture.Value) -> Bool {
             a.location == b.location
         }
@@ -57,6 +64,12 @@ fileprivate extension DragGesture.Value {
 }
 
 public extension View {
+    /// Adds touch gesture recognition to the view.
+    /// - Parameters:
+    ///   - count: The number of touches required for the gesture to be recognised (default: 1).
+    ///   - coordinateSpace: The coordinate space in which the gesture is recognised (default: .local).
+    ///   - onEnded(gestureValue): A closure that is called when the touch gesture ends and representing the touch gesture value.
+    /// - Returns: A modified view with the touch gesture recognition.
     func onTouchGesture(
         count: Int = 1,
         coordinateSpace: CoordinateSpace = .local,

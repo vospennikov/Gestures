@@ -8,15 +8,35 @@
 import SwiftUI
 
 public struct SwipeGesture: ViewModifier {
+    /// The possible directions of a swipe gesture.
     public enum Direction {
         case down, up, right, left, unknown
     }
     
+    /// The minimum distance the user needs to swipe for the gesture to be recognised.
     public var minimumDistance: CGFloat
+    
+    /// The coordinate space in which the gesture is recognised.
     public var coordinateSpace: CoordinateSpace
+    
+    /// A closure that is called when the swipe gesture changes.
+    /// - Parameters:
+    ///   - direction: The direction of the swipe gesture.
+    ///   - location: The current location of the gesture in the coordinate space.
     public var onChanged: (Direction, CGPoint) -> Void
+    
+    /// A closure that is called when the swipe gesture ends.
+    /// - Parameters:
+    ///   - direction: The direction of the swipe gesture.
+    ///   - location: The final location of the gesture in the coordinate space.
     public var onEnded: (Direction, CGPoint) -> Void
     
+    /// Initialises a swipe gesture modifier with the specified parameters.
+    /// - Parameters:
+    ///   - minimumDistance: The minimum distance the user needs to swipe for the gesture to be recognised.
+    ///   - coordinateSpace: The coordinate space in which the gesture is recognised.
+    ///   - onChanged: A closure that is called when the swipe gesture changes.
+    ///   - onEnded: A closure that is called when the swipe gesture ends.
     public init(
         minimumDistance: CGFloat,
         coordinateSpace: CoordinateSpace,
@@ -61,6 +81,13 @@ public struct SwipeGesture: ViewModifier {
 }
 
 public extension View {
+    /// Adds swipe gesture recognition to the view.
+    /// - Parameters:
+    ///   - minimumDistance: The minimum distance the user needs to swipe for the gesture to be recognised (default: 10).
+    ///   - coordinateSpace: The coordinate space in which the gesture is recognised (default: .local).
+    ///   - onChanged(direction, location): A closure that is called when the swipe gesture changes.
+    ///   - onEnded(direction, location): A closure that is called when the swipe gesture ends.
+    /// - Returns: A modified view with the swipe gesture recognition.
     func onSwipeGesture(
         minimumDistance: CGFloat = 10,
         coordinateSpace: CoordinateSpace = .local,
