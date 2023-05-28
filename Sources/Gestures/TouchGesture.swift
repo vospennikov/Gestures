@@ -25,7 +25,8 @@ public struct TouchGesture: ViewModifier {
     }
     
     private var tapGesture: some Gesture {
-        if #available(iOS 16.0, *) {
+        if #available(iOS 16.0, *),
+           #available(macOS 13.0, *) {
             return SpatialTapGesture(count: count)
                 .onEnded { gesture in
                     onEnded(.init(location: gesture.location))

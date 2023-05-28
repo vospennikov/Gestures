@@ -6,7 +6,8 @@ import PackageDescription
 let package = Package(
     name: "Gestures",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v13),
+        .macOS(.v11)
     ],
     products: [
         .library(name: "Gestures", targets: ["Gestures"]),
