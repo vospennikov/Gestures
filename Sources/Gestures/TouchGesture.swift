@@ -32,14 +32,15 @@ public struct TouchGesture: ViewModifier {
                     onEnded(.init(location: gesture.location))
                 }
         } else {
-            return SequenceGesture(TapGesture(count: count),
-                                   DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                .onEnded { gesture in
-                    guard gesture.contains(gesture.location) else {
-                        return
+            return SequenceGesture(
+                TapGesture(count: count),
+                DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    .onEnded { gesture in
+                        guard gesture.contains(gesture.location) else {
+                            return
+                        }
+                        onEnded(.init(location: gesture.location))
                     }
-                    onEnded(.init(location: gesture.location))
-                }
             )
         }
     }
