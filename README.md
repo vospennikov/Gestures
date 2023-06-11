@@ -32,6 +32,12 @@ Gestures is available through CocoaPods. To install it, simply add the following
 ```ruby
 pod 'Gestures', '1.0.4'
 ```
+## Documentation
+
+The documentation for releases and `main` are available here:
+
+* [`main`](https://vospennikov.github.io/Gestures/main/documentation/gestures)
+* [1.0.4](https://vospennikov.github.io/Gestures/1.0.4/documentation/gestures)
 
 ## License
 Gestures is available under the MIT license. See the LICENSE file for more info.
