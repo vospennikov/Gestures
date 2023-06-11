@@ -25,12 +25,12 @@ Rectangle()
 ### Swift Package Manager
 Add the following dependency to your **Package.swift** file:
 ```swift
-.package(url: "https://github.com/vospennikov/Gestures.git", .upToNextMinor(from: "1.0.4"))
+.package(url: "https://github.com/vospennikov/Gestures.git", .upToNextMinor(from: "1.0.5"))
 ```
 ### Cocoapods
 Gestures is available through CocoaPods. To install it, simply add the following line to your Podfile:
 ```ruby
-pod 'Gestures', '1.0.4'
+pod 'Gestures', '1.0.5'
 ```
 ## Documentation
 
