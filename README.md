@@ -1,5 +1,5 @@
 ## Gestures
-![Swift](https://img.shields.io/badge/Swift-5.8-orange?style=flat)
+![Swift](https://img.shields.io/badge/Swift-5.7.1-orange?style=flat)
 ![Platform](https://img.shields.io/badge/platform-iOS%2013%20%7C%20macOS%2011-orange)
 ![Framework](https://img.shields.io/badge/Framework-SwiftUI-orange)
 ![Package Manager](https://img.shields.io/badge/Package%20Manager-SPM%20%7C%20Cocoapods-orange)
