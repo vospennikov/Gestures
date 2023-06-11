@@ -12,8 +12,11 @@ let package = Package(
     products: [
         .library(name: "Gestures", targets: ["Gestures"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.2.0")
+    ],
     targets: [
-        .target(name: "Gestures", dependencies: []),
+        .target(name: "Gestures"),
     ]
 )
 
