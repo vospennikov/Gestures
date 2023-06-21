@@ -30,36 +30,46 @@ public struct TouchGesture: ViewModifier {
     public func body(content: Content) -> some View {
         content.gesture(tapGesture)
     }
-    
+
     private var tapGesture: some Gesture {
-        if #available(iOS 16.0, *),
-           #available(macOS 13.0, *) {
-            return SpatialTapGesture(count: count)
+        if #available(iOS 16.0, *), #available(macOS 13.0, *) {
+            return makeSpatialTapGesture()
+        } else {
+            return makeSequenceGesture()
+        }
+    }
+    
+    // Spatial tap gesture for newer system versions
+    @available(iOS 16.0, *)
+    @available(macOS 13.0, *)
+    private func makeSpatialTapGesture() -> some Gesture {
+        SpatialTapGesture(count: count)
+            .onEnded { gesture in
+                onEnded(.init(location: gesture.location))
+            }
+    }
+    
+    // Sequence gesture for older system versions
+    private func makeSequenceGesture() -> some Gesture {
+        SequenceGesture(
+            TapGesture(count: count),
+            DragGesture(minimumDistance: 0, coordinateSpace: .local)
                 .onEnded { gesture in
+                    guard gesture.contains(gesture.location) else {
+                        return
+                    }
                     onEnded(.init(location: gesture.location))
                 }
-        } else {
-            return SequenceGesture(
-                TapGesture(count: count),
-                DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                    .onEnded { gesture in
-                        guard gesture.contains(gesture.location) else {
-                            return
-                        }
-                        onEnded(.init(location: gesture.location))
-                    }
-            )
-        }
+        )
     }
 }
 
 fileprivate extension DragGesture.Value {
     func contains(_ location: CGPoint) -> Bool {
-        guard ((startLocation.x - 1)...(startLocation.x + 1)).contains(location.x),
-              ((startLocation.y - 1)...(startLocation.y + 1)).contains(location.y) else {
-            return false
-        }
-        return true
+        let isXInBounds = ((startLocation.x - 1)...(startLocation.x + 1)).contains(location.x)
+        let isYInBounds = ((startLocation.y - 1)...(startLocation.y + 1)).contains(location.y)
+
+        return isXInBounds && isYInBounds
     }
 }
 

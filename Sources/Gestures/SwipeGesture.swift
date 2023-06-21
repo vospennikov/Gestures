@@ -51,20 +51,19 @@ public struct SwipeGesture: ViewModifier {
     
     public func body(content: Content) -> some View {
         content
-            .gesture(DragGesture(minimumDistance: minimumDistance, coordinateSpace: coordinateSpace)
-                .onChanged { value in
-                    let direction = direction(y: value.translation.width, x: value.translation.height)
-                    onChanged(direction, value.location)
-                }
-                .onEnded { value in
-                    let direction = direction(y: value.translation.width, x: value.translation.height)
-                    onEnded(direction, value.location)
-                }
+            .gesture(
+                DragGesture(minimumDistance: minimumDistance, coordinateSpace: coordinateSpace)
+                    .onChanged { value in
+                        onChanged(calculateDirection(translation: value.translation), value.location)
+                    }
+                    .onEnded { value in
+                        onEnded(calculateDirection(translation: value.translation), value.location)
+                    }
             )
     }
-    
-    private func direction(y: CGFloat, x: CGFloat) -> SwipeGesture.Direction {
-        let direction = atan2(y, x)
+
+    private func calculateDirection(translation: CGSize) -> Direction {
+        let direction = atan2(translation.width, translation.height)
         switch direction {
         case (-Double.pi / 4..<Double.pi / 4):
             return .down
