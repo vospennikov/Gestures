@@ -1,4 +1,4 @@
-## Gestures: Enhanced Gesture API for SwiftUI
+## Gestures: Enhanced gesture API for SwiftUI
 ![Swift](https://img.shields.io/badge/Swift-5.7.1-orange?style=flat)
 ![Platform](https://img.shields.io/badge/platform-iOS%2013%20%7C%20macOS%2011-orange)
 ![Framework](https://img.shields.io/badge/Framework-SwiftUI-orange)
