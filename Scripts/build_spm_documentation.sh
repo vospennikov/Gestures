@@ -2,17 +2,17 @@
 
 docs_dir="docs-out"
 branch="main"
-tag_pattern="\d+\.\d+\.\d+"
+tag_pattern="\d+.\d+.\d+"
 head_tags=6
 
 rm -rf "$docs_dir/.git"
 rm -rf "$docs_dir/$branch:?"
 
-git tag -l --sort=-v:refname | grep -e "$tag_pattern" | tail -n + "$head_tags" | xargs -I {} rm -rf {}
+git tag -l --sort=-v:refname | grep -E "$tag_pattern" | tail -n +"$head_tags" | xargs -I {} rm -rf {}
 
 for tag in $(
     echo "$branch"
-    git tag -l --sort=-v:refname | grep -e "$tag_pattern" | head -$head_tags
+    git tag -l --sort=-v:refname | grep -E "$tag_pattern" | head -"$head_tags"
 ); do
     if [ -d "$docs_dir/$tag/data/documentation/$package_name" ]; then
         echo "✅ Documentation for $tag already exists."
