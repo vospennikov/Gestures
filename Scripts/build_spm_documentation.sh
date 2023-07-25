@@ -5,36 +5,6 @@ branch="main"
 tag_pattern="\d+.\d+.\d+"
 head_tags=6
 
-rm -rf "$docs_dir/.git"
-rm -rf "$docs_dir/$branch:?"
-
-git tag -l --sort=-v:refname | grep -E "$tag_pattern" | tail -n +"$head_tags" | xargs -I {} rm -rf {}
-
-for tag in $(
-    echo "$branch"
-    git tag -l --sort=-v:refname | grep -E "$tag_pattern" | head -"$head_tags"
-); do
-    if [ -d "$docs_dir/$tag/data/documentation/$package_name" ]; then
-        echo "✅ Documentation for $tag already exists."
-    else
-        echo "⏳ Generating documentation for $package_name @ $tag release."
-        rm -rf "$docs_dir/$tag:?"
-
-        git checkout .
-        git checkout "$tag"
-
-        swift package \
-            --allow-writing-to-directory "$docs_dir/$tag" \
-            generate-documentation \
-            --target "$package_name" \
-            --output-path "$docs_dir/$tag" \
-            --transform-for-static-hosting \
-            --hosting-base-path /"$package_name"/"$tag" &&
-            echo "✅ Documentation generated for $package_name @ $tag release." ||
-            echo "⚠️ Documentation skipped for $package_name @ $tag."
-    fi
-done
-
 usage() {
     echo "This script generates and handles documentation for a specific Swift package."
     echo "Removes old documentation, checks out specific versions, and generates new documentation."
@@ -65,4 +35,36 @@ while getopts ":d:b:t:c:p:" opt; do
     p) package_name="$OPTARG" ;;
     \?) usage ;;
     esac
+done
+
+###
+
+rm -rf "$docs_dir/.git"
+rm -rf "$docs_dir/$branch:?"
+
+git tag -l --sort=-v:refname | grep -E "$tag_pattern" | tail -n +"$head_tags" | xargs -I {} rm -rf {}
+
+for tag in $(
+    echo "$branch"
+    git tag -l --sort=-v:refname | grep -E "$tag_pattern" | head -"$head_tags"
+); do
+    if [ -d "$docs_dir/$tag/data/documentation/$package_name" ]; then
+        echo "✅ Documentation for $tag already exists."
+    else
+        echo "⏳ Generating documentation for $package_name @ $tag release."
+        rm -rf "$docs_dir/$tag:?"
+
+        git checkout .
+        git checkout "$tag"
+
+        swift package \
+            --allow-writing-to-directory "$docs_dir/$tag" \
+            generate-documentation \
+            --target "$package_name" \
+            --output-path "$docs_dir/$tag" \
+            --transform-for-static-hosting \
+            --hosting-base-path /"$package_name"/"$tag" &&
+            echo "✅ Documentation generated for $package_name @ $tag release." ||
+            echo "⚠️ Documentation skipped for $package_name @ $tag."
+    fi
 done
