@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
-  spec.name                  = 'Gestures'
-  spec.version               = '1.0.5'
+  spec.name                  = 'SUIGestures'
+  spec.version               = '1.0.6'
   spec.license               = { :type => 'MIT', :file => 'LICENSE' }
   spec.homepage              = 'https://github.com/vospennikov/Gestures'
   spec.authors               = { 'Mikhail Vospennikov' => 'm.vospennikov@gmail.com' }

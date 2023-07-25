@@ -27,17 +27,19 @@ For additional usage examples, please refer to the [example application](Example
 ### Swift Package Manager
 To install the Gestures library with Swift Package Manager, add the following line to the dependencies array in your **Package.swift** file::
 ```swift
-.package(url: "https://github.com/vospennikov/Gestures.git", .upToNextMinor(from: "1.0.5"))
+.package(url: "https://github.com/vospennikov/Gestures.git", .upToNextMinor(from: "1.0.6"))
 ```
 ### Cocoapods
 Alternatively, you can install Gestures using CocoaPods. Add the following line to your Podfile:
 ```ruby
-pod 'Gestures', '1.0.5'
+pod 'SUIGestures', '1.0.6'
 ```
 ## Documentation
 
 The documentation for releases and `main` are available here:
 
+* [`1.0.6`](https://vospennikov.github.io/Gestures/1.0.6/documentation/gestures/)
+* [`1.0.5`](https://vospennikov.github.io/Gestures/1.0.5/documentation/gestures/)
 * [`main`](https://vospennikov.github.io/Gestures/main/documentation/gestures)
 
 ## License
