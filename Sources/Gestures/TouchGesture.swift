@@ -10,23 +10,23 @@ import SwiftUI
 public struct TouchGesture: ViewModifier {
     /// The number of touches required for the gesture to be recognised.
     public var count: Int
-    
+
     /// The coordinate space in which the gesture is recognised.
     public var coordinateSpace: CoordinateSpace
-    
+
     /// A closure that is called when the touch gesture ends.
     public var onEnded: (Value) -> Void
-    
+
     /// The value representing the touch gesture.
     public struct Value: Equatable {
         /// The location of the touch gesture in the coordinate space.
         public var location: CGPoint
-        
+
         public static func == (a: TouchGesture.Value, b: TouchGesture.Value) -> Bool {
             a.location == b.location
         }
     }
-    
+
     public func body(content: Content) -> some View {
         content.gesture(tapGesture)
     }
@@ -38,7 +38,7 @@ public struct TouchGesture: ViewModifier {
             return makeSequenceGesture()
         }
     }
-    
+
     // Spatial tap gesture for newer system versions
     @available(iOS 16.0, *)
     @available(macOS 13.0, *)
@@ -48,7 +48,7 @@ public struct TouchGesture: ViewModifier {
                 onEnded(.init(location: gesture.location))
             }
     }
-    
+
     // Sequence gesture for older system versions
     private func makeSequenceGesture() -> some Gesture {
         SequenceGesture(
@@ -64,7 +64,7 @@ public struct TouchGesture: ViewModifier {
     }
 }
 
-fileprivate extension DragGesture.Value {
+private extension DragGesture.Value {
     func contains(_ location: CGPoint) -> Bool {
         let isXInBounds = ((startLocation.x - 1)...(startLocation.x + 1)).contains(location.x)
         let isYInBounds = ((startLocation.y - 1)...(startLocation.y + 1)).contains(location.y)
@@ -78,7 +78,8 @@ public extension View {
     /// - Parameters:
     ///   - count: The number of touches required for the gesture to be recognised (default: 1).
     ///   - coordinateSpace: The coordinate space in which the gesture is recognised (default: .local).
-    ///   - onEnded(gestureValue): A closure that is called when the touch gesture ends and representing the touch gesture value.
+    ///   - onEnded(gestureValue): A closure that is called when the touch gesture ends and representing the touch
+    /// gesture value.
     /// - Returns: A modified view with the touch gesture recognition.
     func onTouchGesture(
         count: Int = 1,

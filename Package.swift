@@ -7,20 +7,20 @@ let package = Package(
     name: "Gestures",
     platforms: [
         .iOS(.v13),
-        .macOS(.v11)
+        .macOS(.v11),
     ],
     products: [
         .library(name: "Gestures", targets: ["Gestures"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.2.0")
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.2.0"),
     ],
     targets: [
         .target(name: "Gestures"),
     ]
 )
 
-//for target in package.targets {
+// for target in package.targets {
 //    target.swiftSettings = target.swiftSettings ?? []
 //    target.swiftSettings?.append(
 //        .unsafeFlags([
@@ -32,4 +32,4 @@ let package = Package(
 //            "-enable-testing"
 //        ])
 //    )
-//}
+// }

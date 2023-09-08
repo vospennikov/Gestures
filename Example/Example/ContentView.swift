@@ -5,16 +5,16 @@
 //  Created by Mikhail Vospennikov on 14.02.2023.
 //
 
-import SwiftUI
 import Gestures
+import SwiftUI
 
 struct ContentView: View {
     @State var boxPosition = CGPoint(x: 200, y: 200)
     @State var fingerPosition: CGPoint?
-    
+
     @State var touchLocation: String = "None"
     @State var swipeDirection: String = "None"
-    
+
     var body: some View {
         ZStack {
             Color.white
@@ -27,7 +27,7 @@ struct ContentView: View {
                 } onEnded: { direction, location in
                     swipeGestureEndAction(direction, location: location)
                 }
-            
+
             MovableRectangle
             Information
             if let fingerPosition {
@@ -48,21 +48,21 @@ private extension ContentView {
             fingerPosition = nil
         }
     }
-    
+
     func swipeGestureChangedAction(_ direction: SwipeGesture.Direction, location: CGPoint) {
         swipeDirection = "\(direction): \(location.roundedDescription)"
         fingerPosition = location
     }
-    
+
     func swipeGestureEndAction(_ direction: SwipeGesture.Direction, location: CGPoint) {
         swipeDirection = "\(direction): \(location.roundedDescription)"
         fingerPosition = nil
         switch direction {
-            case .up: boxPosition.y -= 50
-            case .down: boxPosition.y += 50
-            case .left: boxPosition.x -= 50
-            case .right: boxPosition.x += 50
-            default: break
+        case .up: boxPosition.y -= 50
+        case .down: boxPosition.y += 50
+        case .left: boxPosition.x -= 50
+        case .right: boxPosition.x += 50
+        default: break
         }
     }
 }
@@ -76,7 +76,7 @@ private extension ContentView {
             .frame(width: 75, height: 75)
             .position(boxPosition)
     }
-    
+
     @ViewBuilder
     var Information: some View {
         HStack {
@@ -90,7 +90,7 @@ private extension ContentView {
         }
         .padding()
     }
-    
+
     @ViewBuilder
     func Finger(position: CGPoint) -> some View {
         ZStack {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct ExampleApp {
+enum ExampleApp {
     static func main() {
         if #available(iOS 14.0, *) {
             ExampleAppWindowGroup.main()
